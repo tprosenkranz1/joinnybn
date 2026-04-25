@@ -482,6 +482,24 @@
     margin-top: 12px;
     align-self: center;
   }
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-success {
+    margin-top: 24px;
+    padding: 18px 22px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.06);
+    border-radius: 2px;
+    text-align: center;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
   }
@@ -786,7 +804,11 @@
       <h2 class="section-title">Request to Join NYBN</h2>
       <p class="section-intro">Membership is by invitation. If you build in New York, or you lead a category-defining firm that supports those who do, tell us a bit about yourself and we'll be in touch.</p>
 
-      <form class="apply-form" action="mailto:hello@joinnybn.com" method="post" enctype="text/plain">
+      <form class="apply-form" name="join" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?submitted=true">
+        <input type="hidden" name="form-name" value="join" />
+        <p class="hp-field" aria-hidden="true">
+          <label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
         <div class="form-row">
           <div class="field">
             <label for="name">Name</label>
@@ -818,6 +840,9 @@
           <textarea id="message" name="message" placeholder="What you build, who you serve, why NYBN."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Request</button>
+        <div class="form-success" id="form-success" hidden>
+          Thank you. We&rsquo;ve received your request and will be in touch.
+        </div>
       </form>
     </div>
   </div>
@@ -830,7 +855,7 @@
     </div>
     <div class="footer-tag">New York Builders Network</div>
     <div class="footer-contact">
-      <a href="mailto:hello@joinnybn.com">hello@joinnybn.com</a>
+      <a href="mailto:nybnsecretary@gmail.com">nybnsecretary@gmail.com</a>
       <span>New York, NY</span>
     </div>
     <div class="footer-divider"></div>
@@ -841,6 +866,16 @@
 <script>
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Show success message after form submission
+  if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
+    const successEl = document.getElementById('form-success');
+    if (successEl) {
+      successEl.hidden = false;
+      const apply = document.getElementById('apply');
+      if (apply) apply.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
   // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
