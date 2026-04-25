@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NYBN - New York construction, in the right room.</title>
+<meta name="description" content="NYBN is an invitation-only network for New York builders and trusted industry partners - smaller rooms, better conversations, and relationships that compound beyond the event." />
+<meta property="og:title" content="New York Builders Network - In the right room." />
+<meta property="og:description" content="An invitation-only network for New York builders and trusted industry partners." />
+<meta property="og:url" content="https://joinnybn.com" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-soft: #131313;
+    --bg-card: #161616;
+    --gold: #d4af37;
+    --gold-bright: #f0d27a;
+    --gold-soft: #b8941f;
+    --text: #f4ecd8;
+    --text-muted: #9a9385;
+    --border: rgba(212, 175, 55, 0.18);
+    --border-strong: rgba(212, 175, 55, 0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--gold-bright); }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-logo svg { height: 28px; width: auto; }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    padding: 10px 22px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-logo {
+    height: 180px;
+    width: auto;
+    margin-bottom: 40px;
+    filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.15));
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+  .hero h1 .accent { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    color: var(--text-muted);
+    max-width: 620px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    display: inline-block;
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+  }
+  .btn-primary:hover {
+    background: var(--gold-bright);
+    border-color: var(--gold-bright);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-meta {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .hero-meta::before, .hero-meta::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--border-strong);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 120px 0;
+    position: relative;
+  }
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    max-width: 760px;
+    color: var(--text);
+  }
+  .section-intro {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 64px;
+  }
+
+  /* ABOUT */
+  .about { background: var(--bg-soft); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 24px;
+  }
+  .about-card {
+    padding: 36px 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .about-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+  }
+  .about-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .about-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .about-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  @media (max-width: 860px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  /* MEMBERS */
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .member-card {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 24px;
+    padding: 28px;
+    background: var(--bg-soft);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .member-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .member-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-3px);
+  }
+  .member-card:hover::before { opacity: 1; }
+  .member-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #232323 100%);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .member-info { display: flex; flex-direction: column; }
+  .member-category {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .member-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .member-role {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .member-role .company { color: var(--gold-bright); }
+  .member-bio {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  @media (max-width: 760px) {
+    .members-grid { grid-template-columns: 1fr; }
+    .member-card { padding: 24px; gap: 20px; grid-template-columns: 72px 1fr; }
+    .member-photo { width: 72px; height: 72px; font-size: 1.4rem; }
+  }
+
+  /* AUDIENCE */
+  .audience { padding-top: 60px; }
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .audience-card {
+    padding: 40px 32px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    text-align: left;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .audience-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+  }
+  .audience-marker {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin-bottom: 22px;
+  }
+  .audience-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .audience-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  @media (max-width: 860px) {
+    .audience-grid { grid-template-columns: 1fr; }
+  }
+
+  /* APPLY */
+  .apply {
+    background: var(--bg-soft);
+    text-align: center;
+  }
+  .apply-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .apply .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .apply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    text-align: left;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .apply-form input,
+  .apply-form textarea,
+  .apply-form select {
+    width: 100%;
+    padding: 16px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+  .apply-form input:focus,
+  .apply-form textarea:focus,
+  .apply-form select:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .apply-form textarea { min-height: 120px; resize: vertical; }
+  .apply-form label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .field { display: flex; flex-direction: column; }
+  .apply-form button {
+    margin-top: 12px;
+    align-self: center;
+  }
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* CONTACT / FOOTER */
+  footer {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-logo svg { height: 80px; margin-bottom: 24px; }
+  .footer-tag {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .footer-contact a { font-weight: 500; }
+  .footer-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--border-strong);
+    margin: 0 auto 32px;
+  }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGO SVG (used in nav, hero, footer via <use>) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="nybn-mark" viewBox="0 0 200 220">
+      <!-- Stylized stacked chevron-house mark -->
+      <g fill="#d4af37">
+        <!-- top chevron -->
+        <path d="M100 10 L160 70 L145 70 L100 25 L55 70 L40 70 Z" />
+        <!-- middle chevron -->
+        <path d="M100 60 L160 120 L145 120 L100 75 L55 120 L40 120 Z" />
+        <!-- bottom chevron with house base on right -->
+        <path d="M100 110 L160 170 L160 210 L130 210 L130 155 L100 125 L55 170 L40 170 Z" />
+      </g>
+    </symbol>
+    <symbol id="nybn-full" viewBox="0 0 320 380">
+      <use href="#nybn-mark" x="60" y="0" width="200" height="220"/>
+      <text x="160" y="270" text-anchor="middle" fill="#f0d27a" font-family="Inter, sans-serif" font-weight="800" font-size="36" letter-spacing="2">NEW YORK</text>
+      <text x="160" y="315" text-anchor="middle" fill="#f0d27a" font-family="Inter, sans-serif" font-weight="800" font-size="36" letter-spacing="2">BUILDERS</text>
+      <text x="160" y="360" text-anchor="middle" fill="#f0d27a" font-family="Inter, sans-serif" font-weight="800" font-size="36" letter-spacing="2">NETWORK</text>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">
+      <svg><use href="#nybn-mark"/></svg>
+      <span>NYBN</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#members">Members</a></li>
+      <li><a href="#apply">Apply</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#apply" class="nav-cta">Request to Join</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="hero-logo"><use href="#nybn-full"/></svg>
+  <h1><span class="accent">New York</span> construction, in the right room.</h1>
+  <p class="hero-sub">NYBN is an invitation-only network for builders and trusted industry partners who want smaller rooms, better conversations, and relationships that compound beyond the event.</p>
+  <div class="hero-actions">
+    <a href="#apply" class="btn btn-primary">Request to Join</a>
+    <a href="#about" class="btn btn-ghost">Learn More</a>
+  </div>
+  <div class="hero-meta">Founded in New York</div>
+</header>
+
+<section class="about" id="about">
+  <div class="container">
+    <span class="section-tag">About NYBN</span>
+    <h2 class="section-title">A different kind of room.</h2>
+    <p class="section-intro">NYBN was created for the conversations that rarely happen at large industry events. We bring together a curated group of New York GCs, subcontractors, and category-leading partners in smaller settings built around trust, usefulness, and long-term relationships.</p>
+
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <div class="about-card-num">01</div>
+        <h3>Curated by category</h3>
+        <p>Partner seats are filled by invitation and intentionally limited by discipline. The result is a room of providers members can actually trust to be useful.</p>
+      </div>
+      <div class="about-card reveal">
+        <div class="about-card-num">02</div>
+        <h3>Small by design</h3>
+        <p>Gatherings are kept intentionally intimate. Real conversation, considered introductions, and the kind of context you only get face to face.</p>
+      </div>
+      <div class="about-card reveal">
+        <div class="about-card-num">03</div>
+        <h3>Built around trust</h3>
+        <p>Members and partners show up to be helpful, not to sell. Discretion is the default, and relationships are designed to compound well past the event.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="members">
+  <div class="container">
+    <span class="section-tag">The Network</span>
+    <h2 class="section-title">Founding Members</h2>
+    <p class="section-intro">A hand-selected group of operators across the disciplines every builder in New York leans on - tech, banking, insurance, accounting, legal, and advisory. Selected for fit, reputation, and a willingness to show up the right way.</p>
+
+    <div class="members-grid">
+
+      <div class="member-card reveal">
+        <div class="member-photo">BN</div>
+        <div class="member-info">
+          <div class="member-category">Accounting &amp; Advisory</div>
+          <div class="member-name">Brian Nuzio</div>
+          <div class="member-role">Managing Director, NY Metro Construction Co-Leader, <span class="company">CBIZ</span></div>
+          <div class="member-bio">Brian co-leads CBIZ's New York Metro construction practice. CPA, CCIFP, and a 2022 CFMA Rising Star, he advises GCs and subcontractors on audit, tax, and operational profitability.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">JL</div>
+        <div class="member-info">
+          <div class="member-category">Accounting &amp; Advisory</div>
+          <div class="member-name">John Licata</div>
+          <div class="member-role"><span class="company">CBIZ</span></div>
+          <div class="member-bio">[Add bio - John's role at CBIZ and construction specialty.]</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">MZ</div>
+        <div class="member-info">
+          <div class="member-category">Construction Law</div>
+          <div class="member-name">Mark Zelko</div>
+          <div class="member-role">Partner &amp; East Coast Chair, Construction Practice, <span class="company">Leech Tishman</span></div>
+          <div class="member-bio">Mark chairs Leech Tishman's East Coast construction practice. 25+ years counseling developers, owners, GCs, and subs on contracts, change orders, lien claims, defective work, and project close-out.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">GG</div>
+        <div class="member-info">
+          <div class="member-category">Fractional CFO</div>
+          <div class="member-name">Geri Gregor</div>
+          <div class="member-role">Founder &amp; Managing Partner, <span class="company">Geri A. Gregor, CPA, PLLC</span></div>
+          <div class="member-bio">Geri provides fractional CFO and accounting services to NY-area construction subcontractors with revenue from $15M to $150M. 20+ years in the industry; past board member and treasurer of the ACE Mentor Program of Greater New York.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">AG</div>
+        <div class="member-info">
+          <div class="member-category">Construction Tech</div>
+          <div class="member-name">Anwar Ghauche</div>
+          <div class="member-role">CEO &amp; Co-Founder, <span class="company">Constrafor</span></div>
+          <div class="member-bio">Anwar leads Constrafor, a procurement and embedded-finance platform now serving roughly a quarter of US construction firms. Stanford MBA with a master's in civil engineering and operations research.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">TR</div>
+        <div class="member-info">
+          <div class="member-category">Construction Tech</div>
+          <div class="member-name">Tommy Rosenkranz</div>
+          <div class="member-role">Product &amp; Design Lead, <span class="company">Constrafor</span></div>
+          <div class="member-bio">Tommy leads product and design at Constrafor, where he's building Cru, the first AI-native ERP for construction subcontractors. Previously a product lead at LinkedIn, where he launched the platform's first generative AI consumer product and its first AI agent, Hiring Assistant. Stanford MBA, Yale BA.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">JS</div>
+        <div class="member-info">
+          <div class="member-category">Insurance &amp; Risk</div>
+          <div class="member-name">Joe Siringo</div>
+          <div class="member-role">CEO, <span class="company">Cornerstone Risk Advisors</span></div>
+          <div class="member-bio">Joe is CEO of Cornerstone Risk Advisors. With more than a decade of construction-insurance experience, he focuses on building tailored coverage and risk programs for builders operating in the New York market.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">JB</div>
+        <div class="member-info">
+          <div class="member-category">Insurance &amp; Risk</div>
+          <div class="member-name">James Baranello</div>
+          <div class="member-role">President, <span class="company">Cornerstone Risk Advisors</span></div>
+          <div class="member-bio">James co-leads Cornerstone Risk Advisors, a New York-based brokerage specializing in construction, nonprofit, and commercial property coverage. Long-time construction risk specialist focused on tailored programs for GCs and subs.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">AS</div>
+        <div class="member-info">
+          <div class="member-category">ESOP &amp; M&amp;A</div>
+          <div class="member-name">Ashley Sarokhan</div>
+          <div class="member-role">Managing Director &amp; NY Metro Market Leader, <span class="company">Lazear Capital</span></div>
+          <div class="member-bio">Ashley leads Lazear's tri-state ESOP and M&amp;A advisory practice, helping owners structure ownership transitions. NYU Stern MBA. Prior leadership roles at KeyBank, Capital One, and M&amp;T Bank.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">MG</div>
+        <div class="member-info">
+          <div class="member-category">Banking</div>
+          <div class="member-name">Matthew Gallo</div>
+          <div class="member-role">EVP &amp; Managing Director, Corporate Banking, <span class="company">BankUnited</span></div>
+          <div class="member-bio">Matt leads BankUnited's New York Metro corporate banking team, providing middle-market lending and capital solutions. Joined BankUnited in 2023 from First Republic.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">KW</div>
+        <div class="member-info">
+          <div class="member-category">Surety &amp; Construction Insurance</div>
+          <div class="member-name">Kevin Walsh</div>
+          <div class="member-role">President, NJ &amp; Mid-Atlantic, <span class="company">American Global</span></div>
+          <div class="member-bio">Kevin leads American Global's New Jersey office and oversees Mid-Atlantic and metro-New York operations. 20+ years in surety, construction insurance, and risk management, with deep experience in complex co-surety, shared-account, and bond programs for major GCs.</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">NE</div>
+        <div class="member-info">
+          <div class="member-category">Wealth &amp; Exit Planning</div>
+          <div class="member-name">Noah Ennis</div>
+          <div class="member-role">Executive Director &amp; Financial Advisor, The McGee and Ennis Group, <span class="company">Morgan Stanley</span></div>
+          <div class="member-bio">Noah co-leads The McGee and Ennis Group at Morgan Stanley. CFP and Certified Exit Planning Advisor focused on liquidity strategies and wealth structuring for business owners and founders. Forbes Top Next-Gen Wealth Advisor (2022-2024).</div>
+        </div>
+      </div>
+
+      <div class="member-card reveal">
+        <div class="member-photo">TG</div>
+        <div class="member-info">
+          <div class="member-category">Construction Tech</div>
+          <div class="member-name">Tony Guarascio</div>
+          <div class="member-role">Chief Revenue Officer, <span class="company">Constrafor</span></div>
+          <div class="member-bio">Tony is Chief Revenue Officer at Constrafor, where he leads go-to-market across the platform's procurement and embedded-finance products. Background as a sales leader and franchise operator, with prior experience at MetLife and Citi.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="audience" id="audience">
+  <div class="container">
+    <span class="section-tag">The Room</span>
+    <h2 class="section-title">Who belongs in the room.</h2>
+    <p class="section-intro">NYBN is small on purpose. Membership is built around three groups - all active, all curated, all focused on doing right by each other.</p>
+
+    <div class="audience-grid">
+      <div class="audience-card reveal">
+        <div class="audience-marker">GC</div>
+        <h3>General Contractors</h3>
+        <p>Active general contractors building in New York.</p>
+      </div>
+      <div class="audience-card reveal">
+        <div class="audience-marker">Sub</div>
+        <h3>Subcontractors</h3>
+        <p>Subcontractors building across NYC and the tri-state area.</p>
+      </div>
+      <div class="audience-card reveal">
+        <div class="audience-marker">Partner</div>
+        <h3>Category Partners</h3>
+        <p>Trusted partners in finance, insurance, accounting, legal, technology, and advisory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apply" id="apply">
+  <div class="container">
+    <div class="apply-inner">
+      <span class="section-tag">Membership</span>
+      <h2 class="section-title">Request to Join NYBN</h2>
+      <p class="section-intro">Membership is by invitation. If you build in New York, or you lead a category-defining firm that supports those who do, tell us a bit about yourself and we'll be in touch.</p>
+
+      <form class="apply-form" action="mailto:hello@joinnybn.com" method="post" enctype="text/plain">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="field">
+            <label for="role">I am a...</label>
+            <select id="role" name="role" required>
+              <option value="">Select one</option>
+              <option>General Contractor</option>
+              <option>Subcontractor</option>
+              <option>Service Provider (Founding Category)</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Tell us a bit about you</label>
+          <textarea id="message" name="message" placeholder="What you build, who you serve, why NYBN."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-logo">
+      <svg><use href="#nybn-full"/></svg>
+    </div>
+    <div class="footer-tag">New York Builders Network</div>
+    <div class="footer-contact">
+      <a href="mailto:hello@joinnybn.com">hello@joinnybn.com</a>
+      <span>New York, NY</span>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-copy">&copy; <span id="year"></span> New York Builders Network. By invitation only.</div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
