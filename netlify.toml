@@ -1,0 +1,12 @@
+# Netlify build configuration for joinnybn.com
+
+[build]
+  publish = "."
+
+  [build.processing]
+    skip_processing = false
+
+    [build.processing.html]
+      forms_detection = true
+        pretty_urls = true
+        
