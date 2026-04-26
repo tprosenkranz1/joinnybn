@@ -804,7 +804,7 @@
       <h2 class="section-title">Request to Join NYBN</h2>
       <p class="section-intro">Membership is by invitation. If you build in New York, or you lead a category-defining firm that supports those who do, tell us a bit about yourself and we'll be in touch.</p>
 
-      <form class="apply-form" name="join" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?submitted=true">
+      <form class="apply-form" name="join" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="join" />
         <p class="hp-field" aria-hidden="true">
           <label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
@@ -867,14 +867,38 @@
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Show success message after form submission
-  if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
-    const successEl = document.getElementById('form-success');
-    if (successEl) {
-      successEl.hidden = false;
-      const apply = document.getElementById('apply');
-      if (apply) apply.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  // Handle Netlify form submission via fetch so we stay on the page
+  const joinForm = document.querySelector('form.apply-form[name="join"]');
+  if (joinForm) {
+    joinForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const formData = new FormData(joinForm);
+      const submitButton = joinForm.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error('Submission failed');
+          const successEl = document.getElementById('form-success');
+          joinForm.querySelectorAll('.form-row, .field, button[type="submit"]').forEach(function (el) {
+            el.style.display = 'none';
+          });
+          if (successEl) successEl.hidden = false;
+        })
+        .catch(function () {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Request';
+          }
+          alert('Something went wrong submitting your request. Please email nybnsecretary@gmail.com directly.');
+        });
+    });
   }
 
   // Reveal on scroll
